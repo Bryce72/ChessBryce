@@ -7,29 +7,21 @@ import com.google.common.collect.ImmutableMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Tile
-{
+public abstract class Tile {
     protected final int tileCoord;
     private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
-
-    private static Map<Integer,EmptyTile> createAllPossibleEmptyTiles()
-    {
+    private static Map<Integer,EmptyTile> createAllPossibleEmptyTiles() {
         final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
-
-        for(int i = 0; i < 64; i++)
-        {
+        for(int i = 0; i < BoardUtils.NUM_TILES; i++) {
             emptyTileMap.put(i, new EmptyTile(i));
         }
         // could also use: Collections.unmodifiableMap(emptyTileMap);
         return ImmutableMap.copyOf(emptyTileMap);
     }
-
-    public static Tile createaTile(final int tileCoord, final Piece piece)
-    {
+    public static Tile createaTile(final int tileCoord, final Piece piece) {
         return piece != null ? new OccupiedTile(tileCoord, piece) : EMPTY_TILES_CACHE.get(tileCoord);
     }
-
-    private Tile(int tileCoord)
+    private Tile(final int tileCoord)
     {
         this.tileCoord = tileCoord;
     }
@@ -66,12 +58,9 @@ public abstract class Tile
 
 
     // Occupied Tile Class
-    public static final class OccupiedTile extends Tile
-    {
-
+    public static final class OccupiedTile extends Tile {
         private final Piece pieceOnTile;
-        OccupiedTile(int tileCoord, Piece pieceOnTile)
-        {
+        OccupiedTile(int tileCoord, final Piece pieceOnTile) {
             super(tileCoord);
             this.pieceOnTile = pieceOnTile;
         }
