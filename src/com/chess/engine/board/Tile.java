@@ -10,7 +10,7 @@ import java.util.Map;
 public abstract class Tile
 {
     protected final int tileCoord;
-    private static final Map<Integer, EmptyTile> EMPTY_TILES = createAllPossibleEmptyTiles();
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE = createAllPossibleEmptyTiles();
 
     private static Map<Integer,EmptyTile> createAllPossibleEmptyTiles()
     {
@@ -20,12 +20,13 @@ public abstract class Tile
         {
             emptyTileMap.put(i, new EmptyTile(i));
         }
+        // could also use: Collections.unmodifiableMap(emptyTileMap);
         return ImmutableMap.copyOf(emptyTileMap);
     }
 
     public static Tile createaTile(final int tileCoord, final Piece piece)
     {
-        return piece != null ? new OccupiedTile(tileCoord, piece) : EMPTY_TILES.get(tileCoord);
+        return piece != null ? new OccupiedTile(tileCoord, piece) : EMPTY_TILES_CACHE.get(tileCoord);
     }
 
     private Tile(int tileCoord)
