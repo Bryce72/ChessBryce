@@ -51,7 +51,7 @@ public class Board {
 
     public static Board  createStandardBoard(){
         final Builder builder = new Builder();
-        //blacks side
+        //blacks sides
         builder.setPiece(new Rook(Alliance.BLACK, 0));
         builder.setPiece(new Knight(Alliance.BLACK, 1));
         builder.setPiece(new Bishop(Alliance.BLACK, 2));
