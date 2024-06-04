@@ -16,7 +16,7 @@ public class Pawn extends Piece{
 
 
 
-    Pawn(final int piecePosition, final Alliance pieceAlliance) {
+    public Pawn(final Alliance pieceAlliance, final int piecePosition) {
         super(piecePosition, pieceAlliance);
     }
 
